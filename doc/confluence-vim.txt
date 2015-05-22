@@ -1,0 +1,9 @@
+Install with pathogen, vundle, or just by putting it in your .vim directory.
+
+Configure it by editing it directly. Yes that's terrible, it's my first vim plugin.
+I promise to improve it.
+
+You need to add your credentials to your .netrc file, or just put it directly
+in the plugin.
+
+Edit pages in your wiki by opening conf://<title>. Enjoy.
