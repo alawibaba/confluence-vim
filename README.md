@@ -18,8 +18,18 @@ Then you can open a file from the command-line like so:
 `vim "conf://space_key/Article Name"`
 
 # Screenshots
+
+Creating a new entry:
 ![New Entry](/images/new-entry.png?raw=true)
+
+Editing an entry:
 ![Editing](/images/editing.png?raw=true)
+
+Saving an entry:
 ![Saving](/images/saving.png?raw=true)
+
+Final Result:
 ![Result](/images/final-result.png?raw=true)
+
+Page History:
 ![Page History](/images/history.png?raw=true)
