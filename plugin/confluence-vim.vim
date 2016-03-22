@@ -40,7 +40,7 @@ if not eval_value:
 
 confluence_url = vim.eval("g:confluence_url")
 r = requests.get(confluence_url, params={'spaceKey': space_name, 'title': article_name, 'status': 'current', 'expand': 'body.view,version.number', 'limit': 1}, verify=True)
-#vim.command("echom \"%s\"" % "\\\"".join(repr(r.text).split("\"")))
+
 resp = json.loads(r.text)['results']
 if len(resp) > 0:
     vim.command("let b:confid = %d" % int(resp[0]['id']))
@@ -96,11 +96,13 @@ confluence_url = vim.eval("g:confluence_url")
 
 if article_id > 0:
     jj = {"id": str(article_id), "title": article_name, "type": "page", "space": { "key": space_name }, "version": { "number": article_v }, "body": { "storage": { "value": article_content, "representation": "storage" } } }
-    r = requests.put('%s/%d' % (confluence_url, article_id), json=jj, verify=True)
+    #r = requests.put('%s/%d' % (confluence_url, article_id), json=jj, verify=True)
+    r = requests.put('%s/%d' % (confluence_url, article_id), data=json.dumps(jj), verify=True, headers={"content-type":"application/json"})
 else:
     jj = {"type": "page", "space": {"key": space_name}, "title": article_name, "body": {"storage": {"value": article_content, "representation": "storage"}}}
-    r = requests.post('%s' % confluence_url, params={'spaceKey': space_name, 'title': article_name}, json=jj, verify=True)
-#vim.command("echom \"%s\"" % "\\\"".join(repr(r.text).split("\"")))
+    #r = requests.post('%s' % confluence_url, params={'spaceKey': space_name, 'title': article_name}, json=jj, verify=True)
+    r = requests.post('%s' % confluence_url, params={'spaceKey': space_name, 'title': article_name}, data=json.dumps(jj), verify=True, headers={"content-type":"application/json"})
+
 resp = json.loads(r.text)
 vim.command("let b:confid = %d" % int(resp['id']))
 vim.command("let b:confv = %d" % int(resp['version']['number']))
